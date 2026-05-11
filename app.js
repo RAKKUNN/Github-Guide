@@ -575,6 +575,22 @@ function tweaksDelegate(e) {
       ta.remove();
     }
   }
+  // TOC 링크 클릭 처리
+  const tocLink = e.target.closest('.toc-list a[data-toc]');
+  if (tocLink) {
+    e.preventDefault();
+    const targetId = tocLink.dataset.toc;
+    const target = document.getElementById(targetId);
+    if (target) {
+      const offset = 100;
+      const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - offset;
+      window.scrollTo({
+        top: targetPosition,
+        behavior: 'smooth'
+      });
+      history.replaceState(null, null, `#${targetId}`);
+    }
+  }
 }
 
 // ─── Scroll progress + active heading ────────────────
