@@ -586,8 +586,10 @@ function tweaksDelegate(e) {
     const target = document.getElementById(targetId);
     console.log('Target element:', target);
     if (target) {
-      const offset = 100;
-      const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - offset;
+      const offset = 80;
+      let targetPosition = target.getBoundingClientRect().top + window.pageYOffset - offset;
+      // 음수 방지
+      if (targetPosition < 0) targetPosition = 0;
       console.log('Scrolling to:', targetPosition);
       window.scrollTo({
         top: targetPosition,
