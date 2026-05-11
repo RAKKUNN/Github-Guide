@@ -21,7 +21,7 @@
   --font-serif: 'IBM Plex Serif', 'Noto Serif KR', 'Apple SD Gothic Neo', serif;
   --font-mono: 'JetBrains Mono', 'IBM Plex Mono', ui-monospace, monospace;
   --body-size: 16px;
-  --measure: 68ch;
+  --measure: 85ch;
 }
 :root[data-theme="sepia"] {
   --paper: #f1e7d2;
@@ -469,8 +469,8 @@ button { font-family: inherit; cursor: pointer; }
 .scroll-progress > i { display: block; height: 100%; background: var(--accent); width: 0%; }
 
 /* ─── Responsive ───────────────────────────────────────── */
-@media (min-width: 1600px) {
-  :root { --measure: 85ch; }
+@media (min-width: 1400px) {
+  :root { --measure: 95ch; }
 }
 @media (max-width: 1280px) {
   .shell { grid-template-columns: 280px minmax(0,1fr); }
