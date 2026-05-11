@@ -436,6 +436,9 @@ function buildMiniToc() {
     <div class="count">${CHAPTERS.findIndex(c => c.id === state.current)}<em> / ${CHAPTERS.length - 1}</em></div>
   </div>`;
   tocEl.innerHTML = html;
+
+  // TOC 링크 클릭 핸들러 설정
+  setupTocLinks();
 }
 
 // ─── Tweaks ───────────────────────────────────────────
@@ -592,6 +595,27 @@ function updateScrollProgress() {
     if (r.top < 120) activeId = h.id;
   });
   links.forEach(l => l.classList.toggle('active', l.dataset.toc === activeId));
+}
+
+// ─── TOC click handler ───────────────────────────────
+function setupTocLinks() {
+  document.querySelectorAll('.toc-list a[data-toc]').forEach(link => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      const targetId = link.dataset.toc;
+      const target = document.getElementById(targetId);
+      if (target) {
+        const offset = 100; // 헤더 높이 고려
+        const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - offset;
+        window.scrollTo({
+          top: targetPosition,
+          behavior: 'smooth'
+        });
+        // URL 해시 업데이트
+        history.replaceState(null, null, `#${targetId}`);
+      }
+    });
+  });
 }
 
 // ─── Init ────────────────────────────────────────────
