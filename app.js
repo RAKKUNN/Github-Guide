@@ -422,9 +422,11 @@ async function renderChapter(chap) {
 function buildMiniToc() {
   const tocEl = document.getElementById('toc');
   const headings = document.querySelectorAll('.md h2, .md h3');
+  console.log('Headings found:', headings.length);
   let html = `<div class="toc-title">이 페이지에서</div><ul class="toc-list">`;
   headings.forEach(h => {
     const lvl = h.tagName === 'H2' ? 'lvl-2' : 'lvl-3';
+    console.log('Heading:', h.tagName, 'id:', h.id, 'text:', h.textContent.substring(0, 30));
     html += `<li class="${lvl}"><a href="#${h.id}" data-toc="${h.id}">${h.textContent}</a></li>`;
   });
   html += `</ul>`;
@@ -580,15 +582,20 @@ function tweaksDelegate(e) {
   if (tocLink) {
     e.preventDefault();
     const targetId = tocLink.dataset.toc;
+    console.log('TOC clicked, targetId:', targetId);
     const target = document.getElementById(targetId);
+    console.log('Target element:', target);
     if (target) {
       const offset = 100;
       const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - offset;
+      console.log('Scrolling to:', targetPosition);
       window.scrollTo({
         top: targetPosition,
         behavior: 'smooth'
       });
       history.replaceState(null, null, `#${targetId}`);
+    } else {
+      console.log('Target element not found for id:', targetId);
     }
   }
 }
