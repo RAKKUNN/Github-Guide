@@ -469,6 +469,9 @@ button { font-family: inherit; cursor: pointer; }
 .scroll-progress > i { display: block; height: 100%; background: var(--accent); width: 0%; }
 
 /* ─── Responsive ───────────────────────────────────────── */
+@media (min-width: 1600px) {
+  :root { --measure: 85ch; }
+}
 @media (max-width: 1280px) {
   .shell { grid-template-columns: 280px minmax(0,1fr); }
   .toc-rail { display: none; }
@@ -480,6 +483,7 @@ button { font-family: inherit; cursor: pointer; }
   .roadmap { grid-template-columns: 1fr; }
   .landing-aside { grid-template-columns: 1fr; }
   .main-bar { padding: 12px 22px; }
+  :root { --measure: 100%; }
 }
 
 /* Selection */
